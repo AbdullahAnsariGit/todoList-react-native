@@ -1,26 +1,28 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
-import React, {useState}from 'react'
+import React, {useState} from 'react';
+import { KeyboardAvoidingView, StyleSheet, View, TextInput, TouchableOpacity, } from "react-native";
 import { Icon } from 'react-native-elements'
+export default TaskInputField = (props) => {
+    const [task, setTask] = useState();
 
-const TaskInputField = () => {
-    const [task, setTask] = useState( )
+    const handleAddTask = (value) => {
+        props.addTask(value);
+        setTask(null);
+    }
+
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}
-        >
-            <TextInput style={styles.inputField} value={task} onChange={(text) => setTask(text)}/>
-
-            <TouchableOpacity onPress={() => handleAddTask(task)}>
+        <KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <TextInput style={styles.inputField} value={task} onChangeText={text => setTask(text)} placeholder={'Write a task'} placeholderTextColor={'#fff'}/>
+        <TouchableOpacity onPress={() => handleAddTask(task)}>
           <View style={styles.button}>
-              <Icon name="keyboard-arrow-up" type='materialIcons' size={24} color="black" />
+          <Icon name="keyboard-arrow-up" type='materialIcons' size={24} color="black" />
           </View>
         </TouchableOpacity>
-        </KeyboardAvoidingView>
-    )
+      </KeyboardAvoidingView>
+    );
 }
-
-export default TaskInputField
 
 const styles = StyleSheet.create({
     container: {
@@ -49,4 +51,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-})
+});
